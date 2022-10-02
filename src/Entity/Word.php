@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\WordRepository;
+use DateTime;
+use DateTimeZone;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: WordRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Word
 {
     #[ORM\Id]
@@ -31,6 +34,13 @@ class Word
 
     #[ORM\ManyToOne(inversedBy: 'words')]
     private ?User $user = null;
+
+    #[ORM\PrePersist]
+    public function setCreatedAtValue(): void
+    {
+        $this->createdAt = new \DateTimeImmutable("now", new DateTimeZone('Europe/Paris'));
+        $this->updatedAt = new \DateTimeImmutable("now", new DateTimeZone('Europe/Paris'));
+    }
 
     public function getId(): ?int
     {
