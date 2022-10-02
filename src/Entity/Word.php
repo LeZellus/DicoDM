@@ -29,10 +29,11 @@ class Word
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'words')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true, onDelete: "SET NULL")]
     private ?Category $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'words')]
+    #[ORM\JoinColumn(nullable: true, onDelete: "SET NULL")]
     private ?User $user = null;
 
     #[ORM\PrePersist]
