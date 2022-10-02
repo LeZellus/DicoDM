@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello WordsController!{% endblock %}
+
+{% block body %}
+    {% for word in words %}
+        <div class="border rounded lg m-2 p-4 border-blue-900">
+            <h1>ID:{{ word.id }}</h1>
+            <h2>{{ word.name }}</h2>
+            <p>{{ word.definition }}</p>
+
+            {% if word.category is not null %}
+                <p>Catégorie : {{ word.category.name }}</p>
+            {% else %}
+                <p>Catégorie : aucune</p>
+            {% endif %}
+
+            {% if word.user is not null %}
+                <p>Ajouté par {{ word.user.email }} le {{ word.createdAt | date('d/m/y') }}</p>
+            {% else %}
+                <p>Ajouté par un inconnu le {{ word.createdAt | date('d/m/y') }}</p>
+            {% endif %}
+            <p>Dernière mise à jour le {{ word.updatedAt | date('d/m/y') }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
