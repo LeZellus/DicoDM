@@ -1,26 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello WordsController!{% endblock %}
+{% block title %}Mots{% endblock %}
 
 {% block body %}
-    {% for word in words %}
-        <div class="border rounded lg m-2 p-4 border-blue-900">
-            <h1>ID:{{ word.id }}</h1>
-            <h2>{{ word.name }}</h2>
-            <p>{{ word.definition }}</p>
+    <section class="grid gap-8">
+        {% for word in words %}
+            <div class="relative p-8 border-solid bg-gray-900 border-4 border-red-300 overflow-hidden rounded-xl text-gray-300 grid gap-4" style="border-color: {{ random(hexa) }};">
+                <h2 class="text-4xl font-bold uppercase">{{ word.name }} || ID:{{ word.id }}</h2>
+                <div>
+                    <h3 class="uppercase bg-gray-300 text-gray-900 inline py-1 px-4 rounded-xl text-sm">
+                    {% if word.category is not null %}
+                        {{ word.category.name }}
+                    {% else %}
+                        Aucune
+                    {% endif %}
+                    </h3>
+                </div>
 
-            {% if word.category is not null %}
-                <p>Catégorie : {{ word.category.name }}</p>
-            {% else %}
-                <p>Catégorie : aucune</p>
-            {% endif %}
+                <p class="my-4 text-lg"><span class="uppercase font-bold">Définition</span> : {{ word.definition }}</p>
 
-            {% if word.user is not null %}
-                <p>Ajouté par {{ word.user.email }} le {{ word.createdAt | date('d/m/y') }}</p>
-            {% else %}
-                <p>Ajouté par un inconnu le {{ word.createdAt | date('d/m/y') }}</p>
-            {% endif %}
-            <p>Dernière mise à jour le {{ word.updatedAt | date('d/m/y') }}</p>
-        </div>
-    {% endfor %}
+                <div class="flex justify-between">
+                    <div>
+                        <p class="italic text-sm">
+                            {% if word.user is not null %}
+                                Ajouté par {{ word.user.email }} le {{ word.createdAt | date('d/m/y') }}
+                            {% else %}
+                                Ajouté par un inconnu le {{ word.createdAt | date('d/m/y') }}
+                            {% endif %}
+                        </p>
+                        <p class="italic text-sm">Dernière mise à jour le {{ word.updatedAt | date('d/m/y') }}</p>
+                    </div>
+
+                    <div class="flex">
+                        <img src="{{ asset('uploads/amoureux.png') }}" class="h-10 mx-2 opacity-30 hover:opacity-100 hover:cursor-pointer" alt="Smiley content">
+                        <img src="{{ asset('uploads/triste.png') }}" class="h-10 mx-2 opacity-30 hover:opacity-100 hover:cursor-pointer" alt="Smiley content">
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
 {% endblock %}

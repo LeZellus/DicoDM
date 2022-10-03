@@ -55,7 +55,7 @@ class AppFixtures extends Fixture
     }
 
     public function addWords (ObjectManager $manager) {
-        for ($i = 0; $i <= 500; $i++) {
+        for ($i = 0; $i <=  100; $i++) {
             $category = $this->categories[array_rand($this->categories)];
             $user = $this->users[array_rand($this->users)];
 
@@ -63,7 +63,7 @@ class AppFixtures extends Fixture
             $word->setUser($user);
             $word->setName($this->faker->word);
             $word->setCategory($category);
-            $word->setDefinition($this->faker->sentence);
+            $word->setDefinition($this->faker->paragraph(2));
             $manager->persist($word);
         }
     }
