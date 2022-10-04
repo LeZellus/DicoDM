@@ -10,10 +10,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class WordsController extends AbstractController
 {
     private string $hexaColor;
+    private ValidatorInterface $validator;
+
+    public function __construct(ValidatorInterface $validator) {
+        $this->validator = $validator;
+    }
+
     #[Route('/words', name: 'words')]
     public function index(ManagerRegistry $doctrine): Response
     {
@@ -41,19 +48,18 @@ class WordsController extends AbstractController
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $word = new Word();
-
         $form = $this->createForm(WordType::class, $word);
-
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $user = $this->getUser();
+            $word = $form->getData();
 
             if($user) {
                 $word->setUser($user);
             }
 
-            $word = $form->getData();
             $manager->persist($word);
             $manager->flush();
 

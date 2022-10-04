@@ -6,6 +6,7 @@ use App\Repository\WordRepository;
 use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: WordRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -17,9 +18,23 @@ class Word
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le champ Nom ne  peut pas être vide')]
+    #[Assert\Length(
+        min: 2,
+        max: 40,
+        minMessage: 'Le mot doit contenir {{ limit }} caractères minimum',
+        maxMessage: 'Le mot ne peut contenir que {{ limit }} caractères minimum',
+    )]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 10,
+        max: 255,
+        minMessage: 'La définition doit contenir {{ limit }} caractères minimum',
+        maxMessage: 'La définition ne peut contenir que {{ limit }} caractères minimum',
+    )]
     private ?string $definition = null;
 
     #[ORM\Column]

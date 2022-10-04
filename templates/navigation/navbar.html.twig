@@ -1,3 +1,10 @@
+<nav class="fixed w-full top-0 left-0 bg-gray-800">
+    <a href="{{ path('home') }}" class="flex items-center justify-center py-4 h-28 ">
+        {{ include('includes/logo.html.twig') }}
+        <img src="{{ asset('uploads/open-book.png') }}" alt="Logo livre" class="ml-2 mb-2 h-8 w-auto">
+    </a>
+</nav>
+
 <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon"/>
 <label for="menu-icon"></label>
 <nav class="nav">
