@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Word;
+use App\Form\WordType;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -31,6 +34,34 @@ class WordsController extends AbstractController
             'controller_name' => 'WordsController',
             'words' => $words,
             'hexa' => $hexaColor,
+        ]);
+    }
+
+    #[Route('/words/definition', name: 'words_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $manager): Response
+    {
+        $word = new Word();
+
+        $form = $this->createForm(WordType::class, $word);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $user = $this->getUser();
+
+            if($user) {
+                $word->setUser($user);
+            }
+
+            $word = $form->getData();
+            $manager->persist($word);
+            $manager->flush();
+
+            return $this->redirectToRoute('words');
+        }
+
+        return $this->renderForm('words/new.html.twig', [
+            'form' => $form,
         ]);
     }
 }

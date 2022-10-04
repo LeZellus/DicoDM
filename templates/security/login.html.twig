@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    <div class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="w-full max-w-md space-y-8">
+            <div>
+                <div class="flex items-center justify-center">
+                    <p class="text-4xl font-bold uppercase"><span class="text-pink-400">D</span>ico <span class="text-green-400">D</span>es <span class="text-blue-400">M</span>ots</p>
+                    <img class="ml-4 pb-2 h-12 w-auto" src="{{ asset('uploads/open-book.png') }}" alt="Your Company">
+                </div>
+                <h2 class="mt-6 text-center text-3xl font-bold tracking-tight">Connectez-vous à votre compte</h2>
+                <p class="mt-2 text-center text-base">
+                    Pas encore inscrit ?
+                    <a href="{{ path('app_register') }}" class="font-medium text-green-400 hover:text-green-200">Inscription</a>
+                </p>
+            </div>
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+
+            <form class="mt-8 space-y-6" method="POST">
+                <input type="hidden" name="remember" value="true">
+                <div class="-space-y-px rounded-md shadow-sm">
+                    <div>
+                        <label for="email-address" class="sr-only">Adresse Email</label>
+                        <input value="{{ last_username }}" id="email-address" name="email" type="email" autocomplete="email" required class="form-input rounded-none rounded-t-md" placeholder="Adresse Email">
+                    </div>
+                    <div>
+                        <label for="password" class="sr-only">Mot de passe</label>
+                        <input id="password" name="password" type="password" autocomplete="current-password" required class="form-input rounded-none rounded-b-md" placeholder="Mot de passe">
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input id="remember-me" name="_remember_me" type="checkbox" class="form-checkbox">
+                        <label for="remember-me" class="ml-2 block text-sm text-pink-400">Se souvenir de moi</label>
+                    </div>
+
+                    <div class="text-sm">
+                        <a href="#" class="font-medium text-pink-400 hover:text-pink-300">Mot de passe oublié?</a>
+                    </div>
+                </div>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <div>
+                    <button type="submit" class="group form-button">
+                          <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <!-- Heroicon name: mini/lock-closed -->
+                            <svg class="h-5 w-5 text-blue-500 group-hover:text-blue-600 transition duration-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                              <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
+                            </svg>
+                          </span>
+                        Connexion
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

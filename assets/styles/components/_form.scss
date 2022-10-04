@@ -1,0 +1,21 @@
+.form {
+  &-input{
+    @apply relative bg-gray-900 block w-full appearance-none border p-4 placeholder-gray-500 focus:z-10 focus:border-green-500 focus:outline-none focus:ring-green-500 sm:text-sm transition duration-300;
+  }
+
+  &-checkbox {
+    @apply h-4 w-4 rounded bg-gray-900 text-pink-400 focus:ring-pink-400 transition duration-300;
+  }
+
+  &-button {
+    @apply relative flex w-full justify-center rounded-md border border-transparent bg-blue-400 py-2 px-4 text-sm font-bold text-white hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-300;
+  }
+
+  &-textarea {
+    @apply h-52;
+  }
+}
+
+select {
+  @apply text-blue-400;
+}

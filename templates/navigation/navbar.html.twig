@@ -1,24 +1,11 @@
-<nav class="bg-gray-900 fixed w-full top-0 z-10">
-    <div class="mx-auto max-w-5xl px-2 sm:px-6 lg:px-8">
-        <div class="relative flex h-24 items-center justify-between">
-
-            <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div class="flex flex-shrink-0 items-center">
-                    <img class="h-8" src="{{ asset('uploads/open-book.png') }}" alt="Logo Dico des mots">
-                </div>
-                <div class="hidden sm:ml-6 sm:block">
-                    <div class="flex space-x-4">
-                        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <a href="{{ path("words") }}" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Les mots</a>
-
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Les prénoms</a>
-
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Proposer un mot</a>
-
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon"/>
+<label for="menu-icon"></label>
+<nav class="nav">
+    <ul class="pt-5">
+        <li><a href="{{ path('words') }}">Mots</a></li>
+        <li><a href="#">Prénoms</a></li>
+        <li><a href="#">Catégories</a></li>
+        <li><a href="{{ path('words_new') }}">Ajouter un mot</a></li>
+        <li><a href="{{ path('app_login') }}">Connexion</a></li>
+    </ul>
 </nav>

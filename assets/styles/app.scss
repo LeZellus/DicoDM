@@ -3,11 +3,8 @@
 @import "tailwindcss/utilities";
 
 @import url('https://fonts.googleapis.com/css2?family=Lora&family=Poppins:wght@400;700&display=swap');
+@import "components/index";
 
-body {
-  font-family: 'Lora', serif;
-}
-
-h1, h2, h3, h4, h5, h6, a {
+body, input, a, button, label {
   font-family: 'Poppins', sans-serif;
 }
