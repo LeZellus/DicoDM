@@ -31,10 +31,9 @@
                         <p class="italic text-sm">Dernière mise à jour le {{ word.updatedAt | date('d/m/y') }}</p>
                     </div>
 
-                    <div class="flex">
-                        <img src="{{ asset('uploads/like.png') }}" class="h-10 mx-2 opacity-30 hover:opacity-100 hover:cursor-pointer" alt="Smiley content">
-                        <img src="{{ asset('uploads/en-colere.png') }}" class="h-10 mx-2 opacity-30 hover:opacity-100 hover:cursor-pointer" alt="Smiley content">
-                    </div>
+{#                        <img src="{{ asset('uploads/like.png') }}" class="h-10 mx-2 opacity-30 hover:opacity-100 hover:cursor-pointer" alt="Smiley content">#}
+{#                        <img src="{{ asset('uploads/en-colere.png') }}" class="h-10 mx-2 opacity-30 hover:opacity-100 hover:cursor-pointer" alt="Smiley content">#}
+                    {{ include('includes/emoji.html.twig') }}
                 </div>
             </div>
         {% endfor %}

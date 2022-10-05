@@ -1,0 +1,90 @@
+.emoji {
+  animation: float 1s alternate infinite ease-in-out;
+}
+
+.face {
+  @apply rounded-full border-4 border-solid border-gray-300 relative overflow-hidden;
+  width: 60px;
+  height: 60px;
+
+  &:after {
+    @apply block absolute w-full h-full bottom-2 left-2 rounded-full;
+    content: '';
+    box-shadow: -8px 8px 0 0 rgba(0, 0, 0, 0.3);
+  }
+
+  & .eye {
+    animation: blink 5s infinite;
+  }
+
+  &-happy {
+    animation: happy-look 5s infinite;
+  }
+
+  &-standard {
+    animation: standard-look 5s infinite;
+  }
+
+  &.angry {
+    @apply bg-red-500;
+  }
+
+  &.happy {
+    @apply bg-yellow-400;
+  }
+}
+
+.eye {
+  @apply absolute w-1.5 h-1.5 bg-black rounded-full left-2;
+  top: 22px;
+
+  &:last-child {
+    @apply left-auto right-2;
+  }
+
+  &brow {
+    @apply absolute bg-black rounded-full;
+    width: 15px;
+    height: 5px;
+    top: 14px;
+    left: 6px;
+    transform: rotate(30deg);
+
+    &:last-child {
+      left: auto;
+      right: 6px;
+      transform: rotate(-30deg);
+    }
+  }
+}
+
+.eyes, .eyebrows {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.mouth {
+  @apply absolute left-0 right-0 my-0 mx-auto overflow-hidden bg-black;
+  top: 32px;
+  z-index: 2;
+  width: 45px;
+  height: 20px;
+  border-radius: 0 0 70px 70px;
+
+  &-angry {
+    @apply absolute left-0 right-0 my-0 mx-auto rounded-full overflow-hidden bg-black;
+    top: 32px;
+    z-index: 2;
+    width: 20px;
+    height: 3px;
+  }
+}
+
+.mouth.tounge:after {
+  @apply absolute left-0 right-0 rounded-full bg-pink-400 my-0 mx-auto;
+  content: '';
+  width: 38px;
+  height: 38px;
+  top: 15px;
+}
