@@ -27,10 +27,6 @@ class WordsController extends AbstractController
         $repo = $doctrine->getRepository(Word::class);
         $words = $repo->findAll();
 
-        foreach($words as $word) {
-            $hexaColor[] = '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
-        }
-
         if(!$words) {
             throw $this->createNotFoundException(
                 'No product found'
@@ -40,7 +36,6 @@ class WordsController extends AbstractController
         return $this->render('words/index.html.twig', [
             'controller_name' => 'WordsController',
             'words' => $words,
-            'hexa' => $hexaColor,
         ]);
     }
 
@@ -53,6 +48,7 @@ class WordsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $word->setIsPublish(false);
             $user = $this->getUser();
             $word = $form->getData();
 
@@ -69,5 +65,38 @@ class WordsController extends AbstractController
         return $this->renderForm('words/new.html.twig', [
             'form' => $form,
         ]);
+    }
+
+    #[Route('/{slug}', name: 'words_show', methods: ['GET', 'POST'])]
+    public function show(Word $word): Response
+    {
+        //$comments = $article->getComments();
+        //$comment = new Comment();
+        //$form = $this->createForm(CommentType::class, $comment);
+        //$form->handleRequest($request);
+
+        /*if ($form->isSubmitted() && $form->isValid()) {
+
+            $comment->setArticle($article);
+            $comment->setUser($this->getUser());
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Commentaire ajouté');
+            return $this->redirectToRoute('article_show', ['slug' => $article->getSlug()], Response::HTTP_SEE_OTHER);
+        }*/
+
+        if($word->isIsPublish() == "0" && !$this->isGranted('ROLE_ADMIN')){
+            $response = new Response();
+            $response->setStatusCode(403);
+            return $response;
+        } else {
+            return $this->render('words/show.html.twig', [
+                //'form' => $form->createView(),
+                'word' => $word,
+                //'comments' => $comments
+            ]);
+        }
     }
 }

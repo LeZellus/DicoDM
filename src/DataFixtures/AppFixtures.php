@@ -75,6 +75,7 @@ class AppFixtures extends Fixture
             $word->setName($this->faker->word);
             $word->setCategory($category);
             $word->setDefinition($this->faker->paragraph(2));
+            $word->setIsPublish($this->faker->boolean);
             $manager->persist($word);
         }
     }

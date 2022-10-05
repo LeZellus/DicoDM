@@ -3,10 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\WordRepository;
-use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: WordRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -50,6 +50,13 @@ class Word
     #[ORM\ManyToOne(inversedBy: 'words')]
     #[ORM\JoinColumn(nullable: true, onDelete: "SET NULL")]
     private ?User $user = null;
+
+    #[ORM\Column]
+    private ?bool $isPublish = null;
+
+    #[ORM\Column(length: 255, unique: true)]
+    #[Gedmo\Slug(fields: ['name'])]
+    private ?string $slug = null;
 
     #[ORM\PrePersist]
     public function setCreatedAtValue(): void
@@ -133,5 +140,22 @@ class Word
         $this->user = $user;
 
         return $this;
+    }
+
+    public function isIsPublish(): ?bool
+    {
+        return $this->isPublish;
+    }
+
+    public function setIsPublish(bool $isPublish): self
+    {
+        $this->isPublish = $isPublish;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
     }
 }

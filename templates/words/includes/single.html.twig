@@ -1,0 +1,31 @@
+<a href="{{ path('words_show', {slug: word.slug }) }}" class="relative p-8 border-solid bg-gray-900 border-4 border-red-300 overflow-hidden rounded-xl text-gray-300 grid gap-4 random-border">
+    <h2 class="text-4xl font-bold uppercase">{{ word.name }} || ID:{{ word.id }}</h2>
+    <div>
+        <h3 class="uppercase bg-gray-300 text-gray-900 inline py-1 px-4 rounded-xl text-sm">
+            {% if word.category is not null %}
+                {{ word.category.name }}
+            {% else %}
+                Aucune
+            {% endif %}
+        </h3>
+    </div>
+
+    <p class="my-4 text-lg"><span class="uppercase font-bold">Définition</span> : {{ word.definition }}</p>
+
+    <div class="flex justify-between">
+        <div>
+            <p class="italic text-sm">
+                {% if word.user is not null %}
+                    Ajouté par {{ word.user.email }} le {{ word.createdAt | date('d/m/y') }}
+                {% else %}
+                    Ajouté par un inconnu le {{ word.createdAt | date('d/m/y') }}
+                {% endif %}
+            </p>
+            <p class="italic text-sm">Dernière mise à jour le {{ word.updatedAt | date('d/m/y') }}</p>
+        </div>
+
+        {#                        <img src="{{ asset('uploads/like.png') }}" class="h-10 mx-2 opacity-30 hover:opacity-100 hover:cursor-pointer" alt="Smiley content">#}
+        {#                        <img src="{{ asset('uploads/en-colere.png') }}" class="h-10 mx-2 opacity-30 hover:opacity-100 hover:cursor-pointer" alt="Smiley content">#}
+        {% include('includes/emoji.html.twig') %}
+    </div>
+</a>

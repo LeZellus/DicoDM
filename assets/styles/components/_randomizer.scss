@@ -1,0 +1,11 @@
+.random {
+  &-border {
+    $num-colors: 1000;
+
+    @for $i from 0 to $num-colors {
+      &:nth-child(#{$i}) {
+        border-color: rgb(random(255), random(255), random(255));
+      }
+    }
+  }
+}

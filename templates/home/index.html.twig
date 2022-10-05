@@ -1,7 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Accueil | {{ parent() }}{% endblock %}
 
 {% block body %}
     {{ include('includes/hero.html.twig') }}
+
+    <section class="grid gap-4 py-4">
+        <h2 class="text-4xl font-bold">Les derniers mots :</h2>
+        <div class="random-word grid gap-4">
+            {% for word in words %}
+                {% include("words/includes/singlelight.html.twig") %}
+            {% endfor %}
+        </div>
+    </section>
+
 {% endblock %}

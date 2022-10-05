@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ word.name }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+    <section class="grid gap-8">
+        {% include('words/includes/single.html.twig') %}
+    </section>
+{% endblock %}
