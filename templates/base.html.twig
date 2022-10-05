@@ -22,9 +22,9 @@
     <body class="bg-gray-800 text-gray-200 h-full pt-32">
         {{ include('navigation/navbar.html.twig') }}
         <div class="mx-auto max-w-5xl px-2 sm:px-6 lg:px-8">
-            {#{{ include('includes/hero.html.twig') }}#}
             {% block body %}
             {% endblock %}
         </div>
+        {{ include('navigation/footer.html.twig') }}
     </body>
 </html>
