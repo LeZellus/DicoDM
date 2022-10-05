@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use App\Repository\WordRepository;
 use DateTimeZone;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -57,6 +60,26 @@ class Word
     #[ORM\Column(length: 255, unique: true)]
     #[Gedmo\Slug(fields: ['name'])]
     private ?string $slug = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $exemple = null;
+
+    #[ORM\Column]
+    private ?bool $isPub = null;
+
+    #[ORM\Column]
+    private ?bool $isOnline = null;
+
+    #[ORM\Column]
+    private ?bool $isCrush = null;
+
+    #[ORM\OneToMany(mappedBy: 'word', targetEntity: Comment::class)]
+    private Collection $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     #[ORM\PrePersist]
     public function setCreatedAtValue(): void
@@ -157,5 +180,83 @@ class Word
     public function getSlug(): ?string
     {
         return $this->slug;
+    }
+
+    public function getExemple(): ?string
+    {
+        return $this->exemple;
+    }
+
+    public function setExemple(string $exemple): self
+    {
+        $this->exemple = $exemple;
+
+        return $this;
+    }
+
+    public function isIsPub(): ?bool
+    {
+        return $this->isPub;
+    }
+
+    public function setIsPub(bool $isPub): self
+    {
+        $this->isPub = $isPub;
+
+        return $this;
+    }
+
+    public function isIsOnline(): ?bool
+    {
+        return $this->isOnline;
+    }
+
+    public function setIsOnline(bool $isOnline): self
+    {
+        $this->isOnline = $isOnline;
+
+        return $this;
+    }
+
+    public function isIsCrush(): ?bool
+    {
+        return $this->isCrush;
+    }
+
+    public function setIsCrush(bool $isCrush): self
+    {
+        $this->isCrush = $isCrush;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setWord($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getWord() === $this) {
+                $comment->setWord(null);
+            }
+        }
+
+        return $this;
     }
 }
