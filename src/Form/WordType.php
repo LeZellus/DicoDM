@@ -25,6 +25,10 @@ class WordType extends AbstractType
                 'label_attr'=> ['class' => 'hidden'],
                 'attr' => ['placeholder' => 'Définition :  ...', 'class' => 'form-input form-textarea rounded-b-md'],
             ])
+            ->add('exemple', TextareaType::class, [
+                'label_attr'=> ['class' => 'hidden'],
+                'attr' => ['placeholder' => 'Exemple comprenant le mot :  ...', 'class' => 'form-input form-textarea'],
+            ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'attr' => ['class'=> 'form-input rounded-md text-blue-400'],

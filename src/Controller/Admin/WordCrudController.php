@@ -21,6 +21,9 @@ class WordCrudController extends AbstractCrudController
             TextField::new('name'),
             TextEditorField::new('definition'),
             BooleanField::new('isPublish'),
+            BooleanField::new('isPub'),
+            BooleanField::new('isOnline'),
+            BooleanField::new('isCrush'),
         ];
     }
 }

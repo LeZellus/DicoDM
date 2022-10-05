@@ -49,6 +49,9 @@ class WordsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $word->setIsPublish(false);
+            $word->setIsPub(true);
+            $word->setIsCrush(false);
+            $word->setIsOnline(false);
             $user = $this->getUser();
             $word = $form->getData();
 
