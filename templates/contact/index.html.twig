@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact | {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="flex flex-col min-h-full items-center justify-center px-4 sm:px-6 lg:px-8 pb-8">
+        <div class="w-full max-w-md space-y-8">
+            <div>
+                <h2 class="mt-6 text-center text-3xl font-bold tracking-tight">Contact</h2>
+                <p class="mt-2 text-center text-base">
+                    Pas encore inscrit ?
+                    <a href="{{ path('app_register') }}" class="font-medium text-green-400 hover:text-green-200">Inscription</a>
+                </p>
+            </div>
+
+            {% for message in app.flashes('success') %}
+                <div class="text-green-400 text-center">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {{ form_start(formContact, {'attr':  {'class': 'mt-8 space-y-6'}}) }}
+                <div class="text-red-400 space-y-2 text-center">
+                    {{ form_errors(formContact.name) }}
+                    {{ form_errors(formContact.email) }}
+                    {{ form_errors(formContact.message) }}
+                </div>
+                <div>
+                    {{ form_widget(formContact.name) }}
+                    {{ form_widget(formContact.email) }}
+                    {{ form_widget(formContact.message) }}
+                </div>
+                {{ form_widget(formContact.submit) }}
+            {{ form_end(formContact) }}
+        </div>
+
+        <div class="grid gap-4 mt-6 w-full max-w-md text-justify">
+            <h2 class="mt-6 text-center text-3xl font-bold tracking-tight">Pourquoi me contacter ?</h2>
+            <p>Je m'engage à lire tout vos messages ! Et voici quelques idées pour t'aider : </p>
+            <ul class="pl-6 list-disc grid gap-2">
+                <li>Si tu trouves un bug 🐛 , n'hésite pas à m'indiquer où !</li>
+                <li>Tu as un problème sur le site ? Tu n'arrives pas à faire quelques chose ? Viens m'en parler et je ferais au mieux pour t'aider</li>
+                <li>Tu as une idée d'amélioration ? Partage la et peut être qu'elle sera mise en place</li>
+                <li>Tu veux me parler d'autres chose ? Aucun soucis non plus !</li>
+            </ul>
+            <p>A bientôt !</p>
+        </div>
+    </div>
+{% endblock %}

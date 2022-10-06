@@ -1,0 +1,9 @@
+<div>
+    <h3 class="uppercase bg-gray-300 text-gray-900 inline py-1 px-4 rounded-xl text-sm">
+        {% if word.category is not null %}
+            {{ word.category.name }}
+        {% else %}
+            Aucune
+        {% endif %}
+    </h3>
+</div>

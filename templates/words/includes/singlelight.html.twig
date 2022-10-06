@@ -1,12 +1,4 @@
-<a href="{{ path('words_show', {slug: word.slug }) }}" class="relative p-8 border-solid bg-gray-900 border-4 border-red-300 overflow-hidden rounded-xl text-gray-300 grid gap-4 random-border">
-    <h2 class="text-4xl font-bold uppercase">{{ word.name }} || ID:{{ word.id }}</h2>
-    <div>
-        <h3 class="uppercase bg-gray-300 text-gray-900 inline py-1 px-4 rounded-xl text-sm">
-            {% if word.category is not null %}
-                {{ word.category.name }}
-            {% else %}
-                Aucune
-            {% endif %}
-        </h3>
-    </div>
+<a href="{{ path('words_show', {slug: word.slug }) }}" class="card">
+    <h2 class="card-title">{{ word.name }} || ID:{{ word.id }}</h2>
+    {% include('categories/includes/category.html.twig') %}
 </a>

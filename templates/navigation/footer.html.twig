@@ -1,15 +1,16 @@
-<nav class="bg-gray-900 p-8 flex justify-between">
-    <p class="text-sm flex items-center uppercase">
+<footer class="bg-gray-900 p-8 sm:flex justify-between">
+    <p class="text-sm items-center uppercase hidden sm:flex">
         Fabriqué avec
         <img src="{{ asset('uploads/like.png') }}" alt="Smiley yeux en coeurs" class="h-6 w-auto mx-2">
         par
         <a target="_blank" href="https://www.linkedin.com/in/zellrdesign/" class="text-blue-400 text-bold ml-2">Mathéo Zeller</a>
     </p>
     <div class="flex space-x-2">
-        <a href="" class="hover:text-pink-400 transition duration-300">
+        <a href="{{ path("app_about") }}" class="hover:text-pink-400 transition
+        duration-300">
             A propos
         </a>
-        <a href="" class="hover:text-pink-400 transition duration-300">
+        <a href="{{ path("app_contact") }}" class="hover:text-pink-400 transition duration-300">
             Contact
         </a>
         <a target="_blank" href="https://github.com/LeZellus" class="hover:text-pink-400 transition duration-300">
@@ -17,4 +18,4 @@
         </a>
         <a href="" class="truc"></a>
     </div>
-</nav>
+</footer>

@@ -1,0 +1,16 @@
+.card {
+  @apply cursor-pointer relative p-8 border-solid bg-gray-900 border-4 border-red-300
+  overflow-hidden rounded-xl text-gray-300 grid gap-4 random-border duration-300 shadow-none;
+
+  &-title {
+    @apply text-4xl font-bold uppercase;
+  }
+
+  &-date {
+    @apply italic text-sm;
+  }
+
+  &:hover {
+    @apply border-gray-900 transition duration-300;
+  }
+}

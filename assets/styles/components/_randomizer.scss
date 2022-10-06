@@ -6,6 +6,10 @@
       &:nth-child(#{$i}) {
         border-color: rgb(random(255), random(255), random(255));
       }
+
+      &:nth-child(#{$i}):hover {
+        box-shadow: 0 25px 50px -12px rgba(random(255), random(255), random(255), 0.25);
+      }
     }
   }
 }

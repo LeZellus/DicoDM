@@ -25,7 +25,7 @@ class WordsController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         $repo = $doctrine->getRepository(Word::class);
-        $words = $repo->findAll();
+        $words = $repo->findLastWords();
 
         if(!$words) {
             throw $this->createNotFoundException(
@@ -33,13 +33,14 @@ class WordsController extends AbstractController
             );
         }
 
+
         return $this->render('words/index.html.twig', [
             'controller_name' => 'WordsController',
             'words' => $words,
         ]);
     }
 
-    #[Route('/words/definition', name: 'words_new', methods: ['GET', 'POST'])]
+    #[Route('/words/ajouter-un-mot', name: 'words_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $word = new Word();
@@ -89,17 +90,18 @@ class WordsController extends AbstractController
             $this->addFlash('success', 'Commentaire ajouté');
             return $this->redirectToRoute('article_show', ['slug' => $article->getSlug()], Response::HTTP_SEE_OTHER);
         }*/
+        return $this->render('words/show.html.twig', [
+            //'form' => $form->createView(),
+            'word' => $word,
+            //'comments' => $comments
+        ]);
 
-        if($word->isIsPublish() == "0" && !$this->isGranted('ROLE_ADMIN')){
+        if($word->isIsPublish() == "0"){
             $response = new Response();
             $response->setStatusCode(403);
             return $response;
         } else {
-            return $this->render('words/show.html.twig', [
-                //'form' => $form->createView(),
-                'word' => $word,
-                //'comments' => $comments
-            ]);
+
         }
     }
 }
