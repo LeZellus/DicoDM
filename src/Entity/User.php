@@ -40,7 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Word::class)]
     private Collection $words;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true, options: ['default' => 'Anonyme'])]
     private ?string $pseudo = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class)]
@@ -50,6 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->words = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->roles = ["ROLE_USER"];
     }
 
     public function getId(): ?int

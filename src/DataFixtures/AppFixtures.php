@@ -42,6 +42,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i <= 1; $i++) {
             $category = new Category();
             $category->setName($categoriesNames[$i]);
+            $category->setDescription($this->faker->paragraph());
             $manager->persist($category);
             $this->categories[] = $category;
         }
@@ -75,7 +76,10 @@ class AppFixtures extends Fixture
             $word->setName($this->faker->word);
             $word->setCategory($category);
             $word->setDefinition($this->faker->paragraph(2));
+            $word->setExemple($this->faker->paragraph(2));
             $word->setIsPublish($this->faker->boolean);
+            $word->setIsCrush($this->faker->boolean);
+            $word->setIsPub($this->faker->boolean);
             $manager->persist($word);
         }
     }

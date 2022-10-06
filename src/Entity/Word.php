@@ -54,7 +54,7 @@ class Word
     #[ORM\JoinColumn(nullable: true, onDelete: "SET NULL")]
     private ?User $user = null;
 
-    #[ORM\Column]
+    #[ORM\Column(options: ['default' => false])]
     private ?bool $isPublish = null;
 
     #[ORM\Column(length: 255, unique: true)]
@@ -64,13 +64,10 @@ class Word
     #[ORM\Column(type: Types::TEXT)]
     private ?string $exemple = null;
 
-    #[ORM\Column]
+    #[ORM\Column(options: ['default' => true])]
     private ?bool $isPub = null;
 
-    #[ORM\Column]
-    private ?bool $isOnline = null;
-
-    #[ORM\Column]
+    #[ORM\Column(options: ['default' => false])]
     private ?bool $isCrush = null;
 
     #[ORM\OneToMany(mappedBy: 'word', targetEntity: Comment::class)]
@@ -202,18 +199,6 @@ class Word
     public function setIsPub(bool $isPub): self
     {
         $this->isPub = $isPub;
-
-        return $this;
-    }
-
-    public function isIsOnline(): ?bool
-    {
-        return $this->isOnline;
-    }
-
-    public function setIsOnline(bool $isOnline): self
-    {
-        $this->isOnline = $isOnline;
 
         return $this;
     }
