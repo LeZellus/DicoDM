@@ -1,0 +1,5 @@
+{% for letter in 'a'..'z' %}
+
+    <a href="{{ path('words') }}?filter={{ letter }}">{{ letter }}</a>
+
+{% endfor %}
